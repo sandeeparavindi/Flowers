@@ -51,10 +51,15 @@
         <div class="col-md-6">
           <h2>Customer Manage</h2>
           <form id="customerForm">
-            <!-- <div class="form-group">
-          <label for="customerId">Customer ID</label>
-          <input type="text" class="form-control" id="customerId" readonly>
-        </div> -->
+            <div class="form-group">
+              <label for="customerId">Customer ID</label>
+              <input
+                type="text"
+                class="form-control"
+                id="customerId"
+                readonly
+              />
+            </div>
             <div class="form-group">
               <label for="customerName">Customer Name</label>
               <input type="text" class="form-control" id="customerName" />
@@ -70,6 +75,9 @@
             <button type="button" class="btn btn-primary" id="submitCustomer">
               Submit
             </button>
+            <!-- <button type="button" class="btn btn-warning" id="updateCustomer">
+              Update
+            </button> -->
             <button type="button" class="btn btn-warning" id="updateCustomer">
               Update
             </button>
@@ -315,5 +323,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="controller/customer.js"></script>
+    <script src="controller/item.js"></script>
   </body>
 </html>
