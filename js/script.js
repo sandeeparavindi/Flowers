@@ -34,51 +34,43 @@ $(document).ready(function() {
             }
         });
     });
-
-
-    // // Auto-generate Customer ID
-    // let customerCount = 1;
-    // $('#customerId').val('C-00' + customerCount);
-
-    // // Submit Customer
-    // $('#submitCustomer').click(function() {
-    //     let id = $('#customerId').val();
-    //     let name = $('#customerName').val();
-    //     let address = $('#customerAddress').val();
-    //     let mobile = $('#customerMobile').val();
-    //     $('#customerTable').append('<tr><td>' + id + '</td><td>' + name + '</td><td>' + address + '</td><td>' + mobile + '</td></tr>');
-    //     customerCount++;
-    //     $('#customerId').val('C-00' + customerCount);
-    //     $('#customerForm')[0].reset();
-    // });
-    //
-    // // Auto-generate Item Code
-    // let itemCount = 1;
-    // $('#itemCode').val('I-00' + itemCount);
-    //
-    // // Submit Item
-    // $('#submitItem').click(function() {
-    //     let code = $('#itemCode').val();
-    //     let description = $('#itemDescription').val();
-    //     let price = $('#itemPrice').val();
-    //     let qty = $('#itemQty').val();
-    //     $('#itemTable').append('<tr><td>' + code + '</td><td>' + description + '</td><td>' + price + '</td><td>' + qty + '</td></tr>');
-    //     itemCount++;
-    //     $('#itemCode').val('I-00' + itemCount);
-    //     $('#itemForm')[0].reset();
-    // });
-    //
-    // // Add Order Item
-    // $('#addItem').click(function() {
-    //     let code = $('#selectItemCode').val();
-    //     let name = $('#selectItemName').val();
-    //     let price = $('#selectItemPrice').val();
-    //     let qty = $('#selectItemQty').val();
-    //     $('#selectedItemsTable').append('<tr><td>' + code + '</td><td>' + name + '</td><td>' + price + '</td><td>' + qty + '</td></tr>');
-    //     $('#selectItemForm')[0].reset();
-    // });
-    //
-    // // Sample Data for Orders
-    // $('#orderDetailsTable').append('<tr><td>order-001</td><td>8/6/2024</td><td>C-001</td><td>1550</td><td>10</td><td>1395</td><td>5000</td><td>3605</td></tr>');
-    // $('#orderDetailsTable').append('<tr><td>order-002</td><td>8/6/2024</td><td>C-002</td><td>5125</td><td>0</td><td>5125</td><td>3000</td><td>-2125</td></tr>');
+    
+    $(document).ready(function() {
+        // Fetch and display customer data
+        function loadCustomers() {
+            $.ajax({
+                url: "http://localhost:8080/Flowers_war_exploded/customer",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    var customerTable = $('#customerTable');
+                    customerTable.empty(); // Clear existing data
+                    response.forEach(function(customer) {
+                        var row = '<tr class="new-row">' +
+                            '<td>' + customer.id + '</td>' +
+                            '<td>' + customer.name + '</td>' +
+                            '<td>' + customer.address + '</td>' +
+                            '<td>' + customer.mobile + '</td>' +
+                            '</tr>';
+                        customerTable.append(row);
+                    });
+                    // Highlight new rows briefly
+                    // $('.new-row').css('background-color', '#d4edda');
+                    // setTimeout(function() {
+                    //     $('.new-row').css('background-color', '');
+                    // }, 1000);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error:", status, error);
+                }
+            });
+        }
+        
+    
+        // Load customers on page load
+        loadCustomers();
+    
+        // Poll for new data every 5 seconds
+        setInterval(loadCustomers, 5000);
+    });
 });
