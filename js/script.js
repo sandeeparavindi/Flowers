@@ -54,17 +54,36 @@ $(document).ready(function() {
                             '</tr>';
                         customerTable.append(row);
                     });
-                    // Highlight new rows briefly
-                    // $('.new-row').css('background-color', '#d4edda');
-                    // setTimeout(function() {
-                    //     $('.new-row').css('background-color', '');
-                    // }, 1000);
                 },
                 error: function (xhr, status, error) {
                     console.error("Error:", status, error);
                 }
             });
         }
+
+        //search customer
+
+        $('#searchCustomer').on('input', function() {
+            var searchValue = $(this).val().toLowerCase();
+            $('#customerTable tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
+            });
+        });
+
+        $('#searchCustomer').keypress(function(event) {
+            if (event.which == 13) { 
+                var firstVisibleRow = $('#customerTable tr:visible').first();
+                if (firstVisibleRow.length > 0) {
+                    var id = firstVisibleRow.data('id');
+                    var customerName = firstVisibleRow.find('td:nth-child(2)').text();
+                    var customerAddress = firstVisibleRow.find('td:nth-child(3)').text();
+                    var customerMobile = firstVisibleRow.find('td:nth-child(4)').text();
+                    $('#customerName').val(customerName);
+                    $('#customerAddress').val(customerAddress);
+                    $('#customerMobile').val(customerMobile);
+                }
+            }
+        });
         
     
         // Load customers on page load
