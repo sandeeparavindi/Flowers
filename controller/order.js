@@ -75,3 +75,74 @@ $(document).ready(function() {
     loadItems();
 });
 
+// Function to add selected item to the table
+function addItemToTable() {
+    var itemCode = $('#selectItemCode').val();
+    var itemName = $('#selectItemName').val();
+    var itemPrice = $('#selectItemPrice').val();
+    var itemQty = $('#selectItemQty').val();
+
+    if (itemCode && itemName && itemPrice && itemQty) {
+        var table = $('#selectedItemsTable');
+        var newRow = `
+            <tr>
+                <td>${itemCode}</td>
+                <td>${itemName}</td>
+                <td>${itemPrice}</td>
+                <td>${itemQty}</td>
+            </tr>
+        `;
+        table.append(newRow);
+    } else {
+        alert('Please fill out all fields.');
+    }
+}
+
+// Event listener for the "Add" button
+$('#addItem').click(function() {
+    addItemToTable();
+});
+
+
+// Function to reset the selected item fields
+function resetSelectedItemFields() {
+    $('#selectItemCode').val('Select Item Code');
+    $('#selectItemName').val('');
+    $('#selectItemPrice').val('');
+    $('#selectItemQty').val('');
+}
+
+// Event listener for the "Reset" button
+$('#resetSelectedItem').click(function() {
+    resetSelectedItemFields();
+});
+
+var selectedRow = null; 
+
+// Function to handle row selection
+$(document).on('click', '#selectedItemsTable tr', function() {
+    if (selectedRow) {
+        $(selectedRow).removeClass('table-active');
+    }
+    
+    // Select the clicked row
+    selectedRow = this;
+    $(selectedRow).addClass('table-active');
+});
+
+// Function to remove the selected row
+function removeSelectedItem() {
+    if (selectedRow) {
+        $(selectedRow).remove(); 
+        selectedRow = null; 
+    } else {
+        alert('Please select an item to remove.');
+    }
+}
+
+// Event listener for the "Remove" button
+$('#removeSelectedItem').click(function() {
+    removeSelectedItem();
+});
+
+
