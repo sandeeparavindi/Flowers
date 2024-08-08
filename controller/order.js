@@ -145,4 +145,47 @@ $('#removeSelectedItem').click(function() {
     removeSelectedItem();
 });
 
+$(document).ready(function() {
+    // Function to calculate and update total
+    function updateTotal() {
+        const itemPrice = parseFloat($('#selectItemPrice').val()) || 0;
+        const itemQty = parseFloat($('#selectItemQty').val()) || 0;
+        const total = itemPrice * itemQty;
+        $('#orderTotal').val(total.toFixed(2));
+        updateSubTotal(); // Update subtotal whenever total changes
+    }
+
+    // Function to calculate and update subtotal
+    function updateSubTotal() {
+        const total = parseFloat($('#orderTotal').val()) || 0;
+        const discountPercentage = parseFloat($('#orderDiscount').val()) || 0;
+        const discountAmount = (discountPercentage / 100) * total;
+        const subTotal = total - discountAmount;
+        $('#orderSubTotal').val(subTotal.toFixed(2));
+        updateBalance(); // Update balance whenever subtotal changes
+    }
+
+    // Function to calculate and update balance
+    function updateBalance() {
+        const subTotal = parseFloat($('#orderSubTotal').val()) || 0;
+        const cash = parseFloat($('#orderCash').val()) || 0;
+        const balance = cash - subTotal;
+        $('#orderBalance').val(balance.toFixed(2));
+    }
+
+    // Event listeners for input changes
+    $('#selectItemQty, #selectItemPrice').on('input', function() {
+        updateTotal();
+    });
+
+    $('#orderDiscount').on('input', function() {
+        updateSubTotal();
+    });
+
+    $('#orderCash').on('input', function() {
+        updateBalance();
+    });
+});
+
+
 
