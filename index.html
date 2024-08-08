@@ -188,7 +188,9 @@
             </div>
             <div class="form-group">
               <label for="orderCustomerId">Customer ID</label>
-              <input type="text" class="form-control" id="orderCustomerId" />
+              <select class="form-control" aria-label="Disabled select example" id="orderCustomerId">
+                <option selected>Select Customer ID</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="orderCustomerName">Customer Name</label>
@@ -217,12 +219,12 @@
             <button type="button" class="btn btn-primary" id="submitOrder">
               Purchase
             </button>
-            <button type="button" class="btn btn-warning" id="updateOrder">
+            <!-- <button type="button" class="btn btn-warning" id="updateOrder">
               Update
             </button>
             <button type="button" class="btn btn-danger" id="deleteOrder">
               Delete
-            </button>
+            </button> -->
             <button type="button" class="btn btn-secondary" id="resetOrder">
               Reset
             </button>
@@ -233,7 +235,9 @@
           <form id="selectItemForm">
             <div class="form-group">
               <label for="selectItemCode">Item Code</label>
-              <input type="text" class="form-control" id="selectItemCode" />
+              <select class="form-control" aria-label="Disabled select example" id="selectItemCode">
+                <option selected>Select Item Code</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="selectItemName">Item Name</label>
@@ -244,19 +248,19 @@
               <input type="number" class="form-control" id="selectItemPrice" />
             </div>
             <div class="form-group">
-              <label for="selectItemQty">Qty</label>
+              <label for="selectItemQty">Getting Qty</label>
               <input type="number" class="form-control" id="selectItemQty" />
             </div>
             <button type="button" class="btn btn-primary" id="addItem">
               Add
             </button>
-            <button
+            <!-- <button
               type="button"
               class="btn btn-warning"
               id="updateSelectedItem"
             >
               Update
-            </button>
+            </button> -->
             <button
               type="button"
               class="btn btn-danger"
@@ -322,5 +326,6 @@
     <script src="js/script.js"></script>
     <script src="controller/customer.js"></script>
     <script src="controller/item.js"></script>
+    <script src="controller/order.js"></script>
   </body>
 </html>
