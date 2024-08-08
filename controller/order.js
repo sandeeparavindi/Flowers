@@ -1,3 +1,4 @@
+// Function to generate a random Order ID
 function generateOrderId() {
     const orderId = 'ORD-' + Math.floor(Math.random() * 1000000);
     document.getElementById('orderId').value = orderId;
@@ -73,84 +74,15 @@ $(document).ready(function() {
 
     loadCustomers();
     loadItems();
-});
 
-// Function to add selected item to the table
-function addItemToTable() {
-    var itemCode = $('#selectItemCode').val();
-    var itemName = $('#selectItemName').val();
-    var itemPrice = $('#selectItemPrice').val();
-    var itemQty = $('#selectItemQty').val();
-
-    if (itemCode && itemName && itemPrice && itemQty) {
-        var table = $('#selectedItemsTable');
-        var newRow = `
-            <tr>
-                <td>${itemCode}</td>
-                <td>${itemName}</td>
-                <td>${itemPrice}</td>
-                <td>${itemQty}</td>
-            </tr>
-        `;
-        table.append(newRow);
-    } else {
-        alert('Please fill out all fields.');
-    }
-}
-
-// Event listener for the "Add" button
-$('#addItem').click(function() {
-    addItemToTable();
-});
-
-
-// Function to reset the selected item fields
-function resetSelectedItemFields() {
-    $('#selectItemCode').val('Select Item Code');
-    $('#selectItemName').val('');
-    $('#selectItemPrice').val('');
-    $('#selectItemQty').val('');
-}
-
-// Event listener for the "Reset" button
-$('#resetSelectedItem').click(function() {
-    resetSelectedItemFields();
-});
-
-var selectedRow = null; 
-
-// Function to handle row selection
-$(document).on('click', '#selectedItemsTable tr', function() {
-    if (selectedRow) {
-        $(selectedRow).removeClass('table-active');
-    }
-    
-    // Select the clicked row
-    selectedRow = this;
-    $(selectedRow).addClass('table-active');
-});
-
-// Function to remove the selected row
-function removeSelectedItem() {
-    if (selectedRow) {
-        $(selectedRow).remove(); 
-        selectedRow = null; 
-    } else {
-        alert('Please select an item to remove.');
-    }
-}
-
-// Event listener for the "Remove" button
-$('#removeSelectedItem').click(function() {
-    removeSelectedItem();
-});
-
-$(document).ready(function() {
     // Function to calculate and update total
     function updateTotal() {
-        const itemPrice = parseFloat($('#selectItemPrice').val()) || 0;
-        const itemQty = parseFloat($('#selectItemQty').val()) || 0;
-        const total = itemPrice * itemQty;
+        let total = 0;
+        $('#selectedItemsTable tr').each(function() {
+            const price = parseFloat($(this).find('td').eq(2).text()) || 0;
+            const qty = parseFloat($(this).find('td').eq(3).text()) || 0;
+            total += price * qty;
+        });
         $('#orderTotal').val(total.toFixed(2));
         updateSubTotal(); // Update subtotal whenever total changes
     }
@@ -185,8 +117,79 @@ $(document).ready(function() {
     $('#orderCash').on('input', function() {
         updateBalance();
     });
-});
 
+    // Function to add selected item to the table
+    function addItemToTable() {
+        var itemCode = $('#selectItemCode').val();
+        var itemName = $('#selectItemName').val();
+        var itemPrice = $('#selectItemPrice').val();
+        var itemQty = $('#selectItemQty').val();
+
+        if (itemCode && itemName && itemPrice && itemQty) {
+            var table = $('#selectedItemsTable');
+            var newRow = `
+                <tr>
+                    <td>${itemCode}</td>
+                    <td>${itemName}</td>
+                    <td>${itemPrice}</td>
+                    <td>${itemQty}</td>
+                </tr>
+            `;
+            table.append(newRow);
+            updateTotal(); // Recalculate total after adding an item
+            resetSelectedItemFields();
+        } else {
+            alert('Please fill out all fields.');
+        }
+    }
+
+    // Event listener for the "Add" button
+    $('#addItem').click(function() {
+        addItemToTable();
+    });
+
+    // Function to reset the selected item fields
+    function resetSelectedItemFields() {
+        $('#selectItemCode').val('Select Item Code');
+        $('#selectItemName').val('');
+        $('#selectItemPrice').val('');
+        $('#selectItemQty').val('');
+    }
+
+    // Event listener for the "Reset" button
+    $('#resetSelectedItem').click(function() {
+        resetSelectedItemFields();
+    });
+
+    var selectedRow = null;
+
+    // Function to handle row selection
+    $(document).on('click', '#selectedItemsTable tr', function() {
+        if (selectedRow) {
+            $(selectedRow).removeClass('table-active');
+        }
+
+        // Select the clicked row
+        selectedRow = this;
+        $(selectedRow).addClass('table-active');
+    });
+
+    // Function to remove the selected row
+    function removeSelectedItem() {
+        if (selectedRow) {
+            $(selectedRow).remove();
+            selectedRow = null;
+            updateTotal(); // Recalculate total after removing an item
+        } else {
+            alert('Please select an item to remove.');
+        }
+    }
+
+    // Event listener for the "Remove" button
+    $('#removeSelectedItem').click(function() {
+        removeSelectedItem();
+    });
+});
 
 $('#submitOrder').click(function() {
     const orderId = $('#orderId').val();
