@@ -56,7 +56,8 @@
               <input
                 type="text"
                 class="form-control"
-                id="customerId" placeholder="ID is genarate Automatically"
+                id="customerId"
+                placeholder="ID is genarate Automatically"
                 readonly
               />
             </div>
@@ -119,7 +120,13 @@
           <form id="itemForm">
             <div class="form-group">
               <label for="itemCode">Item Code</label>
-              <input type="text" class="form-control" id="itemCode" placeholder="ID is genarate Automatically" readonly />
+              <input
+                type="text"
+                class="form-control"
+                id="itemCode"
+                placeholder="ID is genarate Automatically"
+                readonly
+              />
             </div>
             <div class="form-group">
               <label for="itemDescription">Item Description</label>
@@ -188,7 +195,11 @@
             </div>
             <div class="form-group">
               <label for="orderCustomerId">Customer ID</label>
-              <select class="form-control" aria-label="Disabled select example" id="orderCustomerId">
+              <select
+                class="form-control"
+                aria-label="Disabled select example"
+                id="orderCustomerId"
+              >
                 <option selected>Select Customer ID</option>
               </select>
             </div>
@@ -219,15 +230,6 @@
             <button type="button" class="btn btn-primary" id="submitOrder">
               Purchase
             </button>
-            <!-- <button type="button" class="btn btn-warning" id="updateOrder">
-              Update
-            </button>
-            <button type="button" class="btn btn-danger" id="deleteOrder">
-              Delete
-            </button> -->
-            <button type="button" class="btn btn-secondary" id="resetOrder">
-              Reset
-            </button>
           </form>
         </div>
         <div class="col-md-6">
@@ -235,7 +237,11 @@
           <form id="selectItemForm">
             <div class="form-group">
               <label for="selectItemCode">Item Code</label>
-              <select class="form-control" aria-label="Disabled select example" id="selectItemCode">
+              <select
+                class="form-control"
+                aria-label="Disabled select example"
+                id="selectItemCode"
+              >
                 <option selected>Select Item Code</option>
               </select>
             </div>
@@ -254,13 +260,6 @@
             <button type="button" class="btn btn-primary" id="addItem">
               Add
             </button>
-            <!-- <button
-              type="button"
-              class="btn btn-warning"
-              id="updateSelectedItem"
-            >
-              Update
-            </button> -->
             <button
               type="button"
               class="btn btn-danger"
@@ -327,5 +326,6 @@
     <script src="controller/customer.js"></script>
     <script src="controller/item.js"></script>
     <script src="controller/order.js"></script>
+    <script src="controller/orderDetail.js"></script>
   </body>
 </html>
