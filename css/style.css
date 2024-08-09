@@ -1,8 +1,11 @@
 body {
-    background-color: #f8f9fa;
+  background: linear-gradient(to right, #e3f3fc, white);
+
   }
   .navbar {
     margin-bottom: 20px;
+    background-color: #CDE8E5;
+    height: 70px;
   }
   .section {
     display: none;
@@ -10,3 +13,46 @@ body {
   .section.active {
     display: block;
   }
+
+  #home {
+    background: linear-gradient(to right, #FFDEE9, #B5FFFC);
+    padding: 50px 0;
+    color: #333;
+  }
+  
+  #home .display-4 {
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  #home .lead {
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+  }
+  
+  #home .card {
+    border: none;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  #home .card:hover {
+    transform: translateY(-10px);
+  }
+  
+  #home .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  #home .btn-primary {
+    background-color: #FF6F61;
+    border-color: #FF6F61;
+  }
+  
+  #home .btn-primary:hover {
+    background-color: #FF4A3B;
+    border-color: #FF4A3B;
+  }
+  
